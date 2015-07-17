@@ -4,7 +4,9 @@ var router = require('express').Router({mergeParams: true});
 router.route('/')
 	// return all the tasks
 	.get(function(req, res) {
-		models.Task.findAll().then(function(tasks) {
+		models.Task.findAll({where: {
+			board_id: req.params.board_id
+		}}).then(function(tasks) {
 			res.json(tasks);
 		}).catch(function(err) {
 			res.sendStatus(500);
@@ -16,7 +18,8 @@ router.route('/')
 			title: req.body.title,
 			estimate: req.body.estimate,
 			description: req.body.prediction,
-			state: req.body.state
+			state: req.body.state,
+			board_id: req.params.board_id
 		}).then(function(task) {
 			res.json(task);
 		}).catch(function(err) {
@@ -26,9 +29,12 @@ router.route('/')
 
 router.route('/:task_id')
 	.get(function(req, res) {
-		models.Task.findById(
-			req.params.task_id
-		).then(function(task) {
+		models.Task.find({
+            where: {
+                id: req.params.task_id,
+                board_id: req.params.board_id
+            }
+        }).then(function(task) {
 			if(task) {
 				res.json(task);
 			} else {
@@ -45,7 +51,8 @@ router.route('/:task_id')
 			deleted: true
 		}, {
 			where: {
-				id: req.params.task_id
+				id: req.params.task_id,
+                board_id: req.params.board_id
 			}
 		}).then(function(task) {
 			res.sendStatus(200);
@@ -61,7 +68,8 @@ router.route('/:task_id/state')
 			state: req.body.state
 		}, {
 			where: {
-				id: req.params.task_id
+				id: req.params.task_id,
+                board_id: req.params.board_id
 			}
 		}).then(function(task) {
 			res.sendStatus(200);

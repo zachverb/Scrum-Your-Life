@@ -16,11 +16,6 @@ var taskNoEstimate = {
 var createdTask;
 
 describe("Tasks", function() {
-	describe("Get tasks", function() {
-		it("should return a json array", function(done) {
-      		helper.standardGet(boardRoute + "tasks", done);
-		})
-	});
 
 	describe("Post tasks", function() {
 		it("should return a new task", function(done) {
@@ -47,6 +42,14 @@ describe("Tasks", function() {
 		})
 	});
 
+	describe("Get tasks", function() {
+		it("should return a json array", function(done) {
+      		helper.standardGet(boardRoute + "tasks", done);
+		})
+	});
+
+
+
 	describe("Get specific task", function() {
 		it("should return the specific task", function(done) {
 			helper.standardGet(boardRoute + "tasks/" + createdTask.id, done);
@@ -65,17 +68,6 @@ describe("Tasks", function() {
 		})
 	});
 
-	// describe("Get child tasks", function() {
-	// 	it("Should return 200", function(done) {
-	// 		request.get(base_url + 'tasks/' + createdTask.id + "/children", 
-	// 			function(err, res, body) {
-	// 				expect(res.statusCode).toBe(200);
-	// 				done();
-	// 			}
-	// 		)
-	// 	})
-	// })
-
 	describe("DELETE task", function() {
 		it("should return OK", function(done) {
 			request.del({
@@ -86,5 +78,4 @@ describe("Tasks", function() {
 			});
 		});
 	});
-
 })

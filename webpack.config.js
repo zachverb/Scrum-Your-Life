@@ -1,26 +1,53 @@
-module.exports = function(type) {
+var path = require('path');
+var merge = require('webpack-merge');
 
-  var isDev = type === 'development';
+var TARGET = process.env.TARGET;
+var ROOT_PATH = path.resolve(__dirname);
 
-  var config = {
-    entry: './app/scripts/main.js',
+var isDev = TARGET === 'dev';
+
+var jsxLoader = isDev ? ['react-hot', 'babel?stage=1'] : ['babel?stage=1'];
+
+var common = {
+    entry: path.resolve(ROOT_PATH, 'client/main.js'),
     output: {
-      path: __dirname,
-      filename: 'main.js'
+        path: __dirname + "/build/",
+        filename: 'bundle.js'
     },
-    debug : isDev,
+    resolve: {
+        alias: {
+            'actions': path.resolve(ROOT_PATH, 'client', 'actions'),
+            'components': path.resolve(ROOT_PATH, 'client', 'components'),
+            'store': path.resolve(ROOT_PATH, 'client', 'store')
+        },
+        extensions: ['', '.js', '.jsx']
+    },
+    debug: false,
     module: {
-      loaders: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }]
+        loaders: [{
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loaders: jsxLoader
+        },
+        {
+            test: /\.less$/,
+            loader: "style!css!less"
+        }]
     }
-  };
+}
 
-  if(isDev){
-    config.devtool = 'eval';
-  }
+if(TARGET === 'build') {
+    module.exports = merge(common, {
+      plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+      ]
+    });
+}
 
-  return config;
+if(TARGET === 'dev') {
+    module.exports = common;
 }

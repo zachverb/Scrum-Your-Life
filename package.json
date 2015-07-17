@@ -4,31 +4,39 @@
   "description": "Serverside for my SYL app",
   "main": "server.js",
   "scripts": {
+    "build": "TARGET=build webpack",
     "test": "jasmine-node spec/",
-    "start": "node server.js"
+    "start": "node server.js",
+    "startDev": "TARGET=dev webpack-dev-server --devtool eval --progress --colors --hot --inline --history-api-fallback --content-base build"
   },
   "author": "Zach Verbeck",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^4.7.0",
+    "babel-core": "^5.7.4",
     "babel-jest": "^4.0.0",
-    "babel-loader": "^4.2.0",
+    "babel-loader": "^5.3.2",
     "chai": "*",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
     "mocha": "*",
-    "supertest":"*",
+    "react-hot-loader": "^1.2.8",
+    "supertest": "*",
     "webpack": "^1.7.3"
   },
   "dependencies": {
     "body-parser": "^1.13.2",
+    "css-loader": "^0.15.4",
     "express": "^4.13.1",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "pg-hstore": "^2.3.2",
     "react": "^0.13.1",
     "react-router": "^0.13.2",
     "reflux": "^0.2.7",
     "request": "^2.58.0",
     "sequelize": "latest",
-    "sequelize-cli": "^1.7.1"
+    "sequelize-cli": "^1.7.1",
+    "style-loader": "^0.12.3",
+    "webpack-merge": "^0.1.2"
   }
 }
