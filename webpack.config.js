@@ -49,5 +49,7 @@ if(TARGET === 'build') {
 }
 
 if(TARGET === 'dev') {
-    module.exports = common;
+    module.exports = merge(common, {
+        devtool: "#inline-source-map"
+    });
 }
