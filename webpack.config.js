@@ -1,5 +1,17 @@
 var path = require('path');
 var merge = require('webpack-merge');
+var fs = require('fs');
+var webpack = require('webpack');
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
+
 
 var TARGET = process.env.TARGET;
 var ROOT_PATH = path.resolve(__dirname);
@@ -11,7 +23,7 @@ var jsxLoader = isDev ? ['react-hot', 'babel?stage=1'] : ['babel?stage=1'];
 var common = {
     entry: path.resolve(ROOT_PATH, 'client/main.js'),
     output: {
-        path: __dirname + "/build/",
+        path: path.resolve(ROOT_PATH, 'build'),
         filename: 'bundle.js'
     },
     resolve: {
@@ -35,9 +47,8 @@ var common = {
         }]
     }
 }
-
 if(TARGET === 'build') {
-    module.exports = merge(common, {
+    common = merge(common, {
       plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -49,7 +60,9 @@ if(TARGET === 'build') {
 }
 
 if(TARGET === 'dev') {
-    module.exports = merge(common, {
+    common = merge(common, {
         devtool: "#inline-source-map"
     });
 }
+
+module.exports = common;

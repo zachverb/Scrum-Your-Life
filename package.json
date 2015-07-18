@@ -24,18 +24,22 @@
     "webpack": "^1.7.3"
   },
   "dependencies": {
+    "bcrypt": "^0.8.3",
     "body-parser": "^1.13.2",
     "css-loader": "^0.15.4",
     "express": "^4.13.1",
+    "json-loader": "^0.5.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "pg-hstore": "^2.3.2",
+    "randomstring": "^1.0.7",
     "react": "^0.13.1",
     "react-router": "^0.13.2",
     "reflux": "^0.2.7",
     "request": "^2.58.0",
-    "sequelize": "latest",
+    "sequelize": "^3.4.x",
     "sequelize-cli": "^1.7.1",
+    "source-map-support": "^0.3.2",
     "style-loader": "^0.12.3",
     "webpack-merge": "^0.1.2"
   }
