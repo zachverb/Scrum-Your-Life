@@ -30,7 +30,7 @@ var common = {
         alias: {
             'actions': path.resolve(ROOT_PATH, 'client', 'actions'),
             'components': path.resolve(ROOT_PATH, 'client', 'components'),
-            'store': path.resolve(ROOT_PATH, 'client', 'store')
+            'stores': path.resolve(ROOT_PATH, 'client', 'stores')
         },
         extensions: ['', '.js', '.jsx']
     },

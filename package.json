@@ -26,6 +26,7 @@
     "webpack": "^1.7.3"
   },
   "dependencies": {
+    "alt": "^0.17.1",
     "bcrypt": "^0.8.3",
     "body-parser": "^1.13.2",
     "css-loader": "^0.15.4",
