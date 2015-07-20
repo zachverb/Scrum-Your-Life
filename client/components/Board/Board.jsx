@@ -6,7 +6,8 @@ export default class Board extends React.Component {
     var items = this.props.items;
     return (<ul>{items.map((item, i) =>
         <li key={'task-no' + i}>
-          <Task  value={item.task} />
+          <Task value={item.task}
+                onEdit={this.props.onEdit.bind(null, i)} />
         </li>
     )}
     </ul>)

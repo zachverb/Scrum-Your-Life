@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static('build'));
+app.use(express.static('views'));
 
 app.use('/api/boards', boards);
 app.use('/api', signin);

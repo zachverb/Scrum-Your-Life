@@ -17,6 +17,8 @@
     "babel-loader": "^5.3.2",
     "chai": "*",
     "del": "^1.1.1",
+    "flowcheck": "^0.2.7",
+    "flowcheck-loader": "^1.0.0",
     "gulp": "^3.8.11",
     "mocha": "*",
     "react-hot-loader": "^1.2.8",
