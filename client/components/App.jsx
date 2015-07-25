@@ -2,22 +2,29 @@ import React from 'react';
 import Board from 'components/Board/Board';
 import TaskActions from 'actions/TaskActions';
 import TaskStore from 'stores/TaskStore';
+import storage from 'libs/storage';
+import Immutable from 'immutable';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.storeChanged = this._storeChanged.bind(this);
+    this._storeChanged = this._storeChanged.bind(this);
+
+    TaskActions.init(storage.get('tasks'));
+
     this.state = TaskStore.getState();
   }
   componentDidMount() {
-    TaskStore.listen(this.storeChanged);
+    TaskStore.listen(this._storeChanged);
   }
   componentWillUnmount() {
-    TaskStore.unlisten(this.storeChanged);
+    TaskStore.unlisten(this._storeChanged);
   }
   _storeChanged(state) {
-    this.setState(state);
+    storage.set('tasks', state.tasks.toJS());
+
+    this.setState(TaskStore.getState());
   }
   render() {
     var tasks = this.state.tasks;

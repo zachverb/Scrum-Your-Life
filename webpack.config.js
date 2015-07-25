@@ -12,7 +12,6 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
-
 var TARGET = process.env.TARGET;
 var ROOT_PATH = path.resolve(__dirname);
 
@@ -30,6 +29,7 @@ var common = {
         alias: {
             'actions': path.resolve(ROOT_PATH, 'client', 'actions'),
             'components': path.resolve(ROOT_PATH, 'client', 'components'),
+            'libs': path.resolve(ROOT_PATH, 'client', 'libs'),
             'stores': path.resolve(ROOT_PATH, 'client', 'stores')
         },
         extensions: ['', '.js', '.jsx']
@@ -47,6 +47,7 @@ var common = {
         }]
     }
 }
+
 if(TARGET === 'build') {
     common = merge(common, {
       plugins: [

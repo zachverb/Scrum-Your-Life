@@ -1,31 +1,39 @@
 import alt from '../libs/alt';
-import TaskActions from '../actions/TaskActions';
+import TaskActions from 'actions/TaskActions';
+import Immutable from 'immutable';
 
 class TaskStore {
   constructor() {
     this.bindActions(TaskActions);
 
-    this.tasks = [];
+    this.tasks = Immutable.List();
+  }
+  init(data) {
+    console.log(data);
+    let tasks = Immutable.fromJS(data, (key, value) => {
+      return value.toList();
+    });
+    this.setState({
+      tasks: tasks
+    });
   }
   create(task) {
-    const tasks = this.tasks;
-
+    let tasks = this.tasks;
+    tasks = tasks.push(task);
     this.setState({
-      tasks: tasks.concat({task})
+      tasks: tasks
     });
   }
   update({id, task}) {
-    const tasks = this.tasks;
-
-    tasks[id].task = task;
-
-    this.setState({tasks});
+    let tasks = this.tasks;
+    tasks = tasks.set(id, task)
+    this.setState({tasks: tasks});
   }
   remove(id) {
-    const tasks = this.tasks;
-
+    let tasks = this.tasks;
+    tasks = tasks.delete(id);
     this.setState({
-      tasks: tasks.slice(0, id).concat(tasks.slice(id + 1))
+      tasks: tasks
     });
   }
 }

@@ -31,7 +31,7 @@ export default class Task extends React.Component {
                  onBlur={(e) => this._finishEdit(e)}
                  onKeyPress={(e) => this._checkEnter(e)}
                  />
-        : <div onClick={() => this._edit()}>{value}</div>
+        : <div onClick={() => this._edit()}>{ value }</div>
         }
       </div>
     );
