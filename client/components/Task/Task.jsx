@@ -11,29 +11,31 @@ export default class Task extends React.Component {
       this._finishEdit(e);
     }
   }
-  _edit() {
-    this.setState({ edited: true });
-  }
-  _finishEdit(e) {
-    this.props.onEdit(e.target.value);
 
-    this.setState({ edited: false });
-  }
   render() {
     const {value, onEdit, ...props} = this.props;
-    var edited = this.state.edited;
+    let edited = this.state.edited;
 
     return (
       <div {...props}>{
-        edited
-        ? <input type='text'
+        edited ? <input type='text'
                  defaultValue={value}
                  onBlur={(e) => this._finishEdit(e)}
                  onKeyPress={(e) => this._checkEnter(e)}
                  />
-        : <div onClick={() => this._edit()}>{ value }</div>
+               : <div onClick={() => this._edit()}>{ value }</div>
         }
       </div>
     );
+  }
+
+  _edit() {
+    this.setState({ edited: true });
+  }
+
+  _finishEdit(e) {
+    this.props.onEdit(e.target.value);
+
+    this.setState({ edited: false });
   }
 }

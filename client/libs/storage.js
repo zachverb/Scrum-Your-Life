@@ -8,6 +8,7 @@ export default {
     }
   },
   set: function(k, v) {
+    console.log("We settin it", v);
     localStorage.setItem(k, JSON.stringify(v));
   }
 }

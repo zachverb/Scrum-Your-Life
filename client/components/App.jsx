@@ -3,7 +3,6 @@ import Board from 'components/Board/Board';
 import TaskActions from 'actions/TaskActions';
 import TaskStore from 'stores/TaskStore';
 import storage from 'libs/storage';
-import Immutable from 'immutable';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,23 +10,23 @@ export default class App extends React.Component {
 
     this._storeChanged = this._storeChanged.bind(this);
 
-    TaskActions.init(storage.get('tasks'));
-
     this.state = TaskStore.getState();
   }
+
   componentDidMount() {
     TaskStore.listen(this._storeChanged);
   }
+
   componentWillUnmount() {
     TaskStore.unlisten(this._storeChanged);
   }
-  _storeChanged(state) {
-    storage.set('tasks', state.tasks.toJS());
 
+  _storeChanged(state) {
     this.setState(TaskStore.getState());
   }
+
   render() {
-    var tasks = this.state.tasks;
+    let tasks = this.state.tasks;
     return (
       <div>
         <button onClick={() => this._addItem()}>+</button>
@@ -37,11 +36,13 @@ export default class App extends React.Component {
       </div>
     );
   }
+
   _addItem() {
     TaskActions.create('New task');
   }
+
   _itemEdited(id, task) {
-    if(task) {
+    if (task) {
       TaskActions.update({id, task})
     } else {
       TaskActions.remove(id);

@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(express.static('build'));
 app.use(express.static('views'));
 
-app.use('/api/boards', boards);
 app.use('/api', signin);
+app.use('/api/boards', boards);
 
 app.get('/', function(req, res) {
   res.render('index.html');

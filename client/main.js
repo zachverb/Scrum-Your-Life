@@ -1,7 +1,18 @@
 import React from 'react';
 import App from 'components/App'
+import alt from './libs/alt';
+import storage from './libs/storage';
+import persist from './libs/persist'
 
-var app = document.createElement('div');
-document.body.appendChild(app);
 
-React.render(<App />, app);
+main();
+
+function main() {
+  persist(alt, storage, 'app');
+
+  var app = document.createElement('div');
+
+  document.body.appendChild(app);
+
+  React.render(<App />, app);
+}
