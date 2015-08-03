@@ -17,7 +17,7 @@ var ROOT_PATH = path.resolve(__dirname);
 
 var isDev = TARGET === 'dev';
 
-var jsxLoader = isDev ? ['react-hot', 'babel?stage=1', 'flowcheck'] : ['babel?stage=1'];
+var jsxLoader = isDev ? ['react-hot', 'babel?stage=1'] : ['babel?stage=1'];
 
 var common = {
     entry: path.resolve(ROOT_PATH, 'client/main.js'),

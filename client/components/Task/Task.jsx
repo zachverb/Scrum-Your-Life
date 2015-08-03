@@ -19,11 +19,11 @@ export default class Task extends React.Component {
     return (
       <div {...props}>{
         edited ? <input type='text'
-                 defaultValue={value}
+                 defaultValue={value.task}
                  onBlur={(e) => this._finishEdit(e)}
                  onKeyPress={(e) => this._checkEnter(e)}
                  />
-               : <div onClick={() => this._edit()}>{ value }</div>
+               : <div onClick={() => this._edit()}>{ value.task }</div>
         }
       </div>
     );

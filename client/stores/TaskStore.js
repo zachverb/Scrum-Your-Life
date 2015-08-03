@@ -1,6 +1,8 @@
 import alt from '../libs/alt';
 import TaskActions from 'actions/TaskActions';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
+import uuid from 'node-uuid';
+import findIndex from '../libs/find_index'
 
 class TaskStore {
   constructor() {
@@ -14,20 +16,26 @@ class TaskStore {
   }
 
   create(task) {
+    const tasks = this.tasks;
+    let id = uuid.v4();
     this.setState({
-      tasks: this.tasks.push(task)
+      tasks: tasks.push({ id, task })
     });
   }
 
-  update({id, task}) {
+  update(task) {
+    const tasks = this.tasks;
+    const targetId = findIndex(tasks, 'id', task.id);
     this.setState({
-      tasks: this.tasks.set(id, task)
+      tasks: tasks.set(targetId, task)
     });
   }
 
   remove(id) {
+    const tasks = this.tasks;
+    const index = findIndex(tasks, 'id', id);
     this.setState({
-      tasks: this.tasks.delete(id)
+      tasks: tasks.delete(index)
     });
   }
 }

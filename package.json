@@ -7,7 +7,7 @@
     "build": "TARGET=build webpack",
     "test": "jasmine-node spec/",
     "start": "node server.js",
-    "startDev": "TARGET=dev webpack-dev-server --devtool eval --progress --colors --hot --inline --history-api-fallback --content-base build"
+    "startDev": "TARGET=dev webpack-dev-server --progress --colors --hot --inline --history-api-fallback --content-base build"
   },
   "author": "Zach Verbeck",
   "license": "ISC",
@@ -35,6 +35,7 @@
     "json-loader": "^0.5.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
+    "node-uuid": "^1.4.3",
     "pg-hstore": "^2.3.2",
     "randomstring": "^1.0.7",
     "react": "^0.13.1",

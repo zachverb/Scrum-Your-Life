@@ -1,3 +1,4 @@
+import './main.less'
 import React from 'react';
 import App from 'components/App'
 import alt from './libs/alt';
